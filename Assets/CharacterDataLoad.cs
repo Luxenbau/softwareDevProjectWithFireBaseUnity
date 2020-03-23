@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class CharacterDataLoad : MonoBehaviour
+public class CharacterDataLoad : MonoBehaviour, IPointerClickHandler
 {
     public TextMeshProUGUI charName;
     public TextMeshProUGUI playerName;
@@ -14,7 +15,14 @@ public class CharacterDataLoad : MonoBehaviour
     public TextMeshProUGUI charInitiative;
     public Image charImage;
     public Character character;
-    
+    public Image templateBackground;
+    public bool charSelected;
+    public Color selectColor;
+    public Color standardColor; 
+    public CharacterPartyLoad characterPartyLoad;
+    public string currentLocation;
+    //public bool testing;
+
 
 
 
@@ -35,18 +43,69 @@ public class CharacterDataLoad : MonoBehaviour
 
     void Start()
     {
-       
+        //if (currentLocation=="selectPage")
+        //{
+            characterPartyLoad = GameObject.FindGameObjectWithTag("AddPartyScript").GetComponent<CharacterPartyLoad>();
+       // }
+        // characterPartyLoad = new CharacterPartyLoad();
+        
         // character = new Character();
         //character.CharacterData(0, "Mark", "Mark", 10, 4, "Dwarf", "Paladin");
     }
 
-   
+   public void selectCharacters()
+    {
+
+    }
+
     void Update()
     {
         if (character != null)
         {
             CharDataLoad();
         }
+        if (charSelected)
+        {
+            templateBackground.color = selectColor;
+            
+        }
+        else
+        {
+            templateBackground.color = standardColor;
+        }
+        //if (testing)
+        //{
+        //    templateBackground.color = selectColor;
+        //}
+        
        
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        //throw new System.NotImplementedException();
+        if (currentLocation == "partyPage")
+        {
+            // To do : delete the currently selected characters from the party
+        }
+        else if(currentLocation == "selectPage")
+        {
+
+
+            if (charSelected)
+            {
+                charSelected = false;
+
+
+                characterPartyLoad.partyCharacters.Remove(character);
+            }
+            else
+            {
+                charSelected = true;
+                characterPartyLoad.partyCharacters.Add(character);
+
+            }
+        }
+     Debug.Log(characterPartyLoad.partyCharacters.Count + " characters selected");
     }
 }

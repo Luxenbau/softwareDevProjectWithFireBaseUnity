@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character
 {
+    public int characterId;
     public int iconID;
     public string playerName;
     public string characterName;
@@ -11,6 +12,8 @@ public class Character
     public int characterInitiative;
     public string characterRace;
     public string characterClass;
+
+   // public bool isInParty;
 
     //public Character(string _playerName, string _characterName, int _characterInitiative, string _characterRace, string _characterClass)
     // {

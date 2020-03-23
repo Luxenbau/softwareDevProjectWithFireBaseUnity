@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26099145, g: 0.8018868, b: 0.71900725, a: 1}
+  m_Color: {r: 0.4321378, g: 0.7830189, b: 0.6646569, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1105,6 +1105,10 @@ MonoBehaviour:
   charHP: {fileID: 6858440557484768186}
   charInitiative: {fileID: 6858440557358326390}
   charImage: {fileID: 6858440556321624245}
+  templateBackground: {fileID: 6858440557435286305}
+  charSelected: 0
+  selectColor: {r: 0.43787825, g: 0.6802239, b: 0.754717, a: 1}
+  standardColor: {r: 0.43137258, g: 0.7843138, b: 0.6627451, a: 1}
 --- !u!1 &6858440557484768188
 GameObject:
   m_ObjectHideFlags: 0

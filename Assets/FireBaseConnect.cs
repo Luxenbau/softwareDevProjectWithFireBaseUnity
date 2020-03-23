@@ -12,7 +12,9 @@ public class FireBaseConnect : MonoBehaviour {
     public InputField inputField;
     List<Character> characters = new List<Character>();
     public bool taskComplete = false;
-    
+    public long characterCount;
+    [SerializeField]  CharacterTemplateLoad characterTemplateLoad;
+
 
     // Use this for initialization
     void Start () {
@@ -30,10 +32,11 @@ public class FireBaseConnect : MonoBehaviour {
 
     public void SaveCharacter(Character character)
     {
+        //GetCharactersFromDatabase();
         string json = JsonUtility.ToJson(character);
-      //  for (int i=21; i < 31; i++)
-      //  {
-            reference.Child("Characters").Child("Character20").SetRawJsonValueAsync(json);
+       // for (int i=21; i < 31; i++)
+        //{
+            reference.Child("Characters").Child("Character" +characterCount).SetRawJsonValueAsync(json);
        // }
       //  reference.Child("Characters").Child("Character1").SetRawJsonValueAsync(json);
     }
@@ -51,7 +54,8 @@ public void GetCharactersFromDatabase()
             else if (task.IsCompleted)
             {
                DataSnapshot snapshotCount = task.Result;
-              foreach(var child in snapshotCount.Children)
+                characterCount = snapshotCount.ChildrenCount;
+              foreach (var child in snapshotCount.Children)
                 {
                     Character character = JsonUtility.FromJson<Character>(child.GetRawJsonValue());
                     characters.Add(character);
@@ -59,8 +63,9 @@ public void GetCharactersFromDatabase()
                
                 
             }
+            Debug.Log("Character count in the database " + characterCount);
             GetAllCharacters();
-
+            characterTemplateLoad.connectComplete = true;
 
         });
 
@@ -68,9 +73,6 @@ public void GetCharactersFromDatabase()
 
   public List<Character> CharacterList()
     {
-        //Debug.Log("Inside character list before data load");
-        GetCharactersFromDatabase();
-        //Debug.Log("CharacterList--> got chars from database");
         return characters;
     }
     
